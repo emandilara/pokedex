@@ -57,7 +57,7 @@ class Pokedex extends Component {
         <h2>Pokedex - Gotta catch'em all!</h2>
         <Container fluid>
           <Row>
-            <Col xs={6} md={6}>
+            <Col xs={12} md={6} lg={6}>
               {!this.state.pokemonsFetched && <Loading />}
               {this.state.pokemonsFetched &&
                 <Fragment>                  
@@ -96,7 +96,7 @@ class Pokedex extends Component {
                   </Table>
                 </Fragment>}
             </Col>
-            <Col xs={6} md={6}>
+            <Col xs={12} md={6} lg={6}>
               {!!this.state.showingPokemonInfo && <PokemonInfo about={this.state.pokemonInfo} />}
             </Col>
           </Row>
