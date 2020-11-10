@@ -1,17 +1,23 @@
 import React, { Fragment } from 'react';
+import { Context } from './store/Store';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { mockMyPokemonData } from './resources/mockData';
 
-const MyPokemon = (props) => {
-  //TODO: props are not propagating correctly from parent to here
-  const { data } = { ...props };
+const MyPokemon = () => {
 
-  const mockData = [{ name: "foo" }, { name: "bar" }]
-  const [listItems, setListItems] = React.useState(mockData);
+  // Use global state
+  const [myPokemonList, setMyPokemonList] = React.useContext(Context);
 
+  // The global state does not work properly - it is not persistent when we navigate in the page
+  // I am using mock data just to visualize the list
+  const [listItems, setListItems] = React.useState(mockMyPokemonData);
   const removeFromPokemonList = (name) => {
     const updatedListItems = listItems.filter(pokemon => pokemon.name !== name);
     setListItems(updatedListItems);
+
+    // Updating global state
+    setMyPokemonList({ type: 'REMOVE', payload: name });
   }
 
   return (

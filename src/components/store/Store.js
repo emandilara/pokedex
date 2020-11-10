@@ -1,8 +1,9 @@
 import React, { createContext, useReducer } from "react";
 import Reducer from './Reducer'
-
+import { mockMyPokemonData } from '../resources/mockData';
+ 
 const initialState = {
-  myPokemonList: []
+  myPokemonList: mockMyPokemonData
 };
 
 const Store = ({ children }) => {
