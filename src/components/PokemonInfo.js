@@ -22,12 +22,10 @@ const PokemonInfo = (props) => {
         <Card>
           <Card.Body>
             <h3>{name}</h3>
-            <Card.Text>
-              <h5>Order: {info.order}</h5>
-              <h5>Height: {info.height}</h5>
-              <h5>Weight: {info.weight}</h5>
-              <h5>Base experience: {info.base_experience}</h5>
-            </Card.Text>
+            <h5>Order: {info.order}</h5>
+            <h5>Height: {info.height}</h5>
+            <h5>Weight: {info.weight}</h5>
+            <h5>Base experience: {info.base_experience}</h5>
           </Card.Body>
         </Card>
       }
