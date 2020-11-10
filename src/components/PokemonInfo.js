@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Loading from './Loading';
+import './styles/PokemonInfo.css';
 
 const PokemonInfo = (props) => {
   const { name, url } = { ...props };
@@ -26,9 +27,10 @@ const PokemonInfo = (props) => {
     <Fragment>
       { !infoFetched && <Loading />}
       { !!infoFetched &&
-        <Card>
+        <Card className='pokemonInfo'>
           <Card.Body>
-            <h3>{info.name}</h3>
+            <h3><em>{info.name}</em></h3>
+            <hr />
             <h5>Order: {info.order}</h5>
             <h5>Height: {info.height}</h5>
             <h5>Weight: {info.weight}</h5>

@@ -67,7 +67,7 @@ const Pokedex = () => {
       <h2>Pokedex - Gotta catch'em all!</h2>
       <Container fluid>
         <Row>
-          <Col xs={12} md={6} lg={6}>
+          <Col xs={12} md={8} lg={8}>
             {!pokemonsFetched && <Loading />}
             {pokemonsFetched &&
               <Fragment>
@@ -106,7 +106,7 @@ const Pokedex = () => {
                 </Table>
               </Fragment>}
           </Col>
-          <Col xs={12} md={6} lg={6}>
+          <Col xs={12} md={4} lg={4}>
             {!!showingPokemonInfo && <PokemonInfo name={pokemonInfo.name} url={pokemonInfo.url} />}
           </Col>
         </Row>
