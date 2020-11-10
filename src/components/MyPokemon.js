@@ -3,10 +3,11 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 const MyPokemon = (props) => {
-  // const { data } = { ...props };
+  //TODO: props are not propagating correctly from parent to here
+  const { data } = { ...props };
 
-  const data = [{ name: "foo" }, { name: "bar" }]
-  const [listItems, setListItems] = React.useState(data);
+  const mockData = [{ name: "foo" }, { name: "bar" }]
+  const [listItems, setListItems] = React.useState(mockData);
 
   const removeFromPokemonList = (name) => {
     const updatedListItems = listItems.filter(pokemon => pokemon.name !== name);

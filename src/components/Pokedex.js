@@ -10,13 +10,14 @@ import Loading from './Loading';
 import PokemonInfo from './PokemonInfo';
 
 class Pokedex extends Component {
+  
   state = {
     pokemons: [],
     pokemonsFetched: false,
     showingPokemonInfo: false
   }
 
-  // Filtering pokemon list by name or number
+  // Filtering the pokemon list by name or number
   filterPokemon = (event) => {
     const filterValue = event && event.target && event.target.value.toLowerCase();
     this.setState({
@@ -26,8 +27,8 @@ class Pokedex extends Component {
   }
 
   extractPokemonNumber = (url) => {
-    // This Regexp is to match the pokemon number - however it also matches the version of the API.
-    // It can be improved
+    // This Regexp is to match the pokemon number
+    // However it also matches the version of the API - it can be improved
     const numberPattern = /\d+/g;
     const matches = url.match(numberPattern);
     return matches[1];
@@ -38,7 +39,6 @@ class Pokedex extends Component {
   }
 
   showPokemonInfo = (pokemon) => {
-    console.log('here')
     this.setState({ ...this.state, showingPokemonInfo: true, pokemonInfo: pokemon });
   }
 
@@ -60,8 +60,7 @@ class Pokedex extends Component {
             <Col xs={6} md={6}>
               {!this.state.pokemonsFetched && <Loading />}
               {this.state.pokemonsFetched &&
-                <Fragment>
-                  {this.showingPokemonInfo && <PokemonInfo />}
+                <Fragment>                  
                   <Form>
                     <Form.Group controlId="formBasicEmail">
                       <Form.Control type="text"
