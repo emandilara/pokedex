@@ -13,18 +13,12 @@ import './styles/AppNavigation.css';
 function AppNavigation() {
   return (
     <Router>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="primary" variant="dark" className="navbar">
         <Navbar.Brand>Pokedex</Navbar.Brand>
-        <Nav className="mr-auto">
-        <Nav.Link>
+        <Nav>
           <Link to="/" className="navLink">Home</Link>
-        </Nav.Link>
-        <Nav.Link>
           <Link to="/pokedex" className="navLink">Pokedex</Link>
-        </Nav.Link>
-        <Nav.Link>
           <Link to="/my-pokemon" className="navLink">My Pokemon</Link>
-        </Nav.Link>        
         </Nav>
       </Navbar>
 

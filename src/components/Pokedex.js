@@ -35,6 +35,7 @@ const Pokedex = () => {
     // However it also matches the version of the API - it can be improved
     const numberPattern = /\d+/g;
     const matches = url.match(numberPattern);
+    console.log(matches);
     return matches[1];
   }
 
