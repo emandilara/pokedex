@@ -75,9 +75,9 @@ const Pokedex = () => {
             {pokemonsFetched &&
               <Fragment>
                 <Form>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Control type="text"
-                      placeholder="Search for a pokemon"
+                  <Form.Group controlId='formBasicEmail'>
+                    <Form.Control type='text'
+                      placeholder='Search for a pokemon'
                       onChange={filterPokemon}
                     />
                   </Form.Group>
@@ -96,12 +96,12 @@ const Pokedex = () => {
                       <tr key={index.toString()}>
                         <td>{pokemon.number}</td>
                         <td>
-                          <Button variant="outline-dark" onClick={() => showPokemonInfo(pokemon)}>
+                          <Button variant='outline-dark' onClick={() => showPokemonInfo(pokemon)}>
                             {pokemon.name}
                           </Button>
                         </td>
                         <td>
-                          <Button variant="dark" onClick={() => addToPokemonList(pokemon)}>+</Button>{' '}
+                          <Button variant='dark' onClick={() => addToPokemonList(pokemon)}>+</Button>{' '}
                         </td>
                       </tr>
                     )}

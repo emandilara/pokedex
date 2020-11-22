@@ -36,12 +36,12 @@ const MyPokemon = () => {
               { myPokemon.map((pokemon, index) =>
                 <tr key={index.toString()}>
                   <td>
-                    <Button variant="outline-dark">
+                    <Button variant='outline-dark'>
                       {pokemon}
                     </Button>
                   </td>
                   <td>
-                    <Button variant="dark" onClick={() => removeFromPokemonList(pokemon)}>-</Button>{' '}
+                    <Button variant='dark' onClick={() => removeFromPokemonList(pokemon)}>-</Button>{' '}
                   </td>
                 </tr>
               )}
