@@ -39,7 +39,10 @@ const Pokedex = () => {
   }
 
   const addToPokemonList = (pokemon) => {
-    setMyPokemonList({type: 'ADD', payload: pokemon});
+    const myList = { ...myPokemonList.myPokemonList }
+    if(!myList[pokemon.name]) {
+      setMyPokemonList({type: 'ADD', payload: pokemon});
+    }
   }
 
   const showPokemonInfo = (pokemon) => {

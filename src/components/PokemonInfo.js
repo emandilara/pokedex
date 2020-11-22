@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import Card from 'react-bootstrap/Card';
 import Loading from './Loading';
 import './styles/PokemonInfo.css';
 
@@ -21,7 +21,7 @@ const PokemonInfo = (props) => {
     };
 
     fetchData();
-  }, [name]);
+  }, [name, url]);
 
   return (
     <Fragment>
