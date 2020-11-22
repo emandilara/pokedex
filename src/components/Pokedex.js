@@ -14,6 +14,7 @@ const Pokedex = () => {
 
   // Initialise local state
   const [pokemons, setPokemons] = React.useState([]);
+  const [pokemonsFiltered, setPokemonsFiltered] = React.useState([]);
   const [pokemonInfo, setPokemonInfo] = React.useState(undefined);
   const [pokemonsFetched, setPokemonsFetched] = React.useState(false);
   const [showingPokemonInfo, setShowingPokemonInfo] = React.useState(false);
@@ -24,7 +25,7 @@ const Pokedex = () => {
   // Filtering the pokemon list by name or number
   const filterPokemon = (event) => {
     const filterValue = event && event.target && event.target.value.toLowerCase();
-    setPokemons(
+    setPokemonsFiltered(
       pokemons.filter(pokemon =>
         pokemon.name.toLowerCase().includes(filterValue) || pokemon.number === filterValue)
     );
@@ -58,6 +59,7 @@ const Pokedex = () => {
           const data = res && res.data.results;
           const pokemons = data.map(pokemon => { return { ...pokemon, number: extractPokemonNumber(pokemon.url) } });
           setPokemons(pokemons);
+          setPokemonsFiltered(pokemons);
           setPokemonsFetched(true);
         })
     };
@@ -92,7 +94,7 @@ const Pokedex = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {pokemons.map((pokemon, index) =>
+                    {pokemonsFiltered.map((pokemon, index) =>
                       <tr key={index.toString()}>
                         <td>{pokemon.number}</td>
                         <td>
