@@ -1,20 +1,23 @@
 const Reducer = (state, action) => {
-    switch (action.type) {
-        case 'ADD':
-            console.log('previous pokemon in my list:', state.myPokemonList);
-            return {
-                ...state,
-                myPokemonList: [...state.myPokemonList, action.payload]
-            };
-        case 'REMOVE':
-            console.log('removing from my pokemon:', action.payload);
-            return {
-                ...state,
-                myPokemonList: state.myPokemonList.filter(pokemon => pokemon.name !== action.payload)
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'ADD':
+      const pokemonName = action.payload && action.payload.name;
+      let pokemonToBeAdded = {};
+      pokemonToBeAdded[pokemonName]  = action.payload
+
+      return {
+        ...state,
+        myPokemonList: {...state.myPokemonList, ...pokemonToBeAdded}
+      };
+    case 'REMOVE':
+      const pokemonToBeRemoved = action.payload;
+      delete state.myPokemonList[pokemonToBeRemoved];
+      return {
+        ...state
+      };
+    default:
+      return state;
+  }
 };
 
 export default Reducer;

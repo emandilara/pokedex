@@ -4,18 +4,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AppNavigation from './AppNavigation';
-import AppRouter from './AppRouter';
 import './styles/App.css';
 
 function App() {
   return (
     <div className='app'>
       <Store>
-        <AppNavigation />
         <Container fluid className='app-container'>
           <Row>
             <Col xs={12} md={12} lg={12}>
-              <AppRouter />
+              <AppNavigation />
             </Col>
           </Row>
         </Container>

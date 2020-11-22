@@ -14,6 +14,7 @@ const Pokedex = () => {
 
   // Initialise local state
   const [pokemons, setPokemons] = React.useState([]);
+  const [pokemonsFiltered, setPokemonsFiltered] = React.useState([]);
   const [pokemonInfo, setPokemonInfo] = React.useState(undefined);
   const [pokemonsFetched, setPokemonsFetched] = React.useState(false);
   const [showingPokemonInfo, setShowingPokemonInfo] = React.useState(false);
@@ -24,7 +25,7 @@ const Pokedex = () => {
   // Filtering the pokemon list by name or number
   const filterPokemon = (event) => {
     const filterValue = event && event.target && event.target.value.toLowerCase();
-    setPokemons(
+    setPokemonsFiltered(
       pokemons.filter(pokemon =>
         pokemon.name.toLowerCase().includes(filterValue) || pokemon.number === filterValue)
     );
@@ -32,14 +33,17 @@ const Pokedex = () => {
 
   const extractPokemonNumber = (url) => {
     // This Regexp is to match the pokemon number
-    // However it also matches the version of the API - it can be improved
-    const numberPattern = /\d+/g;
-    const matches = url.match(numberPattern);
-    return matches[1];
+    const numberPattern = /\/[0-9]+\//;
+    const match = url.match(numberPattern);
+    const number = match && match[0].replace(/\//g, '');
+    return number;
   }
 
   const addToPokemonList = (pokemon) => {
-    setMyPokemonList({type: 'ADD', payload: pokemon});
+    const myList = { ...myPokemonList.myPokemonList }
+    if(!myList[pokemon.name]) {
+      setMyPokemonList({type: 'ADD', payload: pokemon});
+    }
   }
 
   const showPokemonInfo = (pokemon) => {
@@ -55,6 +59,7 @@ const Pokedex = () => {
           const data = res && res.data.results;
           const pokemons = data.map(pokemon => { return { ...pokemon, number: extractPokemonNumber(pokemon.url) } });
           setPokemons(pokemons);
+          setPokemonsFiltered(pokemons);
           setPokemonsFetched(true);
         })
     };
@@ -72,9 +77,9 @@ const Pokedex = () => {
             {pokemonsFetched &&
               <Fragment>
                 <Form>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Control type="text"
-                      placeholder="Search for a pokemon"
+                  <Form.Group controlId='formBasicEmail'>
+                    <Form.Control type='text'
+                      placeholder='Search for a pokemon'
                       onChange={filterPokemon}
                     />
                   </Form.Group>
@@ -89,16 +94,16 @@ const Pokedex = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {pokemons.map((pokemon, index) =>
+                    {pokemonsFiltered.map((pokemon, index) =>
                       <tr key={index.toString()}>
                         <td>{pokemon.number}</td>
                         <td>
-                          <Button variant="outline-dark" onClick={() => showPokemonInfo(pokemon)}>
+                          <Button variant='outline-dark' onClick={() => showPokemonInfo(pokemon)}>
                             {pokemon.name}
                           </Button>
                         </td>
                         <td>
-                          <Button variant="dark" onClick={() => addToPokemonList(pokemon)}>+</Button>{' '}
+                          <Button variant='dark' onClick={() => addToPokemonList(pokemon)}>+</Button>{' '}
                         </td>
                       </tr>
                     )}

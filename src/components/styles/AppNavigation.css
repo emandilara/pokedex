@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  .navLink {
+    display: block;
+  }
+}
+
+.navLink {
+  color: white;
+  display: inline-block;
+  padding-left: 50px;
+}
