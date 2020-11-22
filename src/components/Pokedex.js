@@ -32,11 +32,10 @@ const Pokedex = () => {
 
   const extractPokemonNumber = (url) => {
     // This Regexp is to match the pokemon number
-    // However it also matches the version of the API - it can be improved
-    const numberPattern = /\d+/g;
-    const matches = url.match(numberPattern);
-    console.log(matches);
-    return matches[1];
+    const numberPattern = /\/[0-9]+\//;
+    const match = url.match(numberPattern);
+    const number = match && match[0].replace(/\//g, '');
+    return number;
   }
 
   const addToPokemonList = (pokemon) => {
