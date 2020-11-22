@@ -20,8 +20,8 @@ const MyPokemon = () => {
       <h2>My Pokemon</h2>
       { myPokemon.length===0 &&
         <Jumbotron>
-          <h4>It seems like your pokemon list is empty...</h4>
-          <h4>Go to the "Pokedex" tab to start adding pokemon to your list!</h4>
+          <h5>It seems like your pokemon list is empty...</h5>
+          <h5>Go to the <a href='/pokedex'>Pokedex</a> tab to start adding pokemon to your list!</h5>
         </Jumbotron>
       }
       { myPokemon.length>0 &&
