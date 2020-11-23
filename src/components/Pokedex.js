@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Context } from './store/Store';
 import axios from 'axios';
+import { extractPokemonNumber } from './resources/helperFunctions';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,14 +30,6 @@ const Pokedex = () => {
       pokemons.filter(pokemon =>
         pokemon.name.toLowerCase().includes(filterValue) || pokemon.number === filterValue)
     );
-  }
-
-  const extractPokemonNumber = (url) => {
-    // This Regexp is to match the pokemon number
-    const numberPattern = /\/[0-9]+\//;
-    const match = url.match(numberPattern);
-    const number = match && match[0].replace(/\//g, '');
-    return number;
   }
 
   const addToPokemonList = (pokemon) => {
