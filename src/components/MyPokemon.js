@@ -14,22 +14,23 @@ const MyPokemon = () => {
   // Use global state
   const [myPokemonList, setMyPokemonList] = React.useContext(Context);
   
+  // Initialise local state
+  const [pokemonInfo, setPokemonInfo] = React.useState(undefined);
+  const [showingPokemonInfo, setShowingPokemonInfo] = React.useState(false);
+  
   let myPokemon = [];
   const myList = myPokemonList.myPokemonList;
   for(let key in myList) {
     myPokemon.push({ ...myList[key], number: extractPokemonNumber(myList[key].url) })
   }  
   
-  const [pokemonInfo, setPokemonInfo] = React.useState(undefined);
-  const [showingPokemonInfo, setShowingPokemonInfo] = React.useState(false);
-
   const showPokemonInfo = (pokemon) => {
     setShowingPokemonInfo(true);
     setPokemonInfo(pokemon);
   }
   
+  // Dispatch an action of type 'REMOVE' to update global state
   const removeFromPokemonList = (name) => {
-    // Updating global state
     setMyPokemonList({ type: 'REMOVE', payload: name });
   }
 

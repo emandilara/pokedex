@@ -36,6 +36,7 @@ const Pokedex = () => {
     );
   }
 
+  // Dispatch an action of type 'ADD'
   const addToPokemonList = (pokemon) => {
     const myList = { ...myPokemonList.myPokemonList }
     if(!myList[pokemon.name]) {
