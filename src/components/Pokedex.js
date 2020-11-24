@@ -33,10 +33,10 @@ const Pokedex = () => {
     setPokemonsFiltered(
       pokemons.filter(pokemon =>
         pokemon.name.toLowerCase().includes(filterValue) || pokemon.number === filterValue)
-    );
+    )
   }
 
-  // Dispatch an action of type 'ADD'
+  // Dispatch an action of type 'ADD' to update global state
   const addToPokemonList = (pokemon) => {
     const myList = { ...myPokemonList.myPokemonList }
     if(!myList[pokemon.name]) {
