@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Loading from './Loading';
 import PokemonInfo from './PokemonInfo';
+import './styles/Pokedex.css';
 
 const Pokedex = () => {
 
@@ -19,6 +20,9 @@ const Pokedex = () => {
   const [pokemonInfo, setPokemonInfo] = React.useState(undefined);
   const [pokemonsFetched, setPokemonsFetched] = React.useState(false);
   const [showingPokemonInfo, setShowingPokemonInfo] = React.useState(false);
+  const [pokemonUrl, setPokemonUrl] = React.useState(`https://pokeapi.co/api/v2/pokemon`);
+  const [nextUrl, setNextUrl] = React.useState('');
+  const [previousUrl, setPreviousUrl] = React.useState('');
 
   // Use global state
   const [myPokemonList, setMyPokemonList] = React.useContext(Context);
@@ -44,21 +48,33 @@ const Pokedex = () => {
     setPokemonInfo(pokemon);
   }
 
+  const loadNextPokemon = () => {
+    !!nextUrl && setPokemonUrl(nextUrl);
+  }
+
+  const loadPreviousPokemon = () => {
+    !!previousUrl && setPokemonUrl(previousUrl);
+  }
+
   // Fetch data when component mounts
   React.useEffect(() => {
     const fetchData = async () => {
-      axios.get(`https://pokeapi.co/api/v2/pokemon`)
+      axios.get(pokemonUrl)
         .then(res => {
-          const data = res && res.data.results;
+          const data = res && res.data && res.data.results;
           const pokemons = data.map(pokemon => { return { ...pokemon, number: extractPokemonNumber(pokemon.url) } });
+          const next = res && res.data && res.data.next;
+          const previous = res && res.data && res.data.previous;
+          setNextUrl(next);
+          setPreviousUrl(previous);
           setPokemons(pokemons);
           setPokemonsFiltered(pokemons);
           setPokemonsFetched(true);
         })
     };
-
+    
     fetchData();
-  }, []);
+  }, [pokemonUrl]);
 
   return (
     <Fragment>
@@ -96,12 +112,14 @@ const Pokedex = () => {
                           </Button>
                         </td>
                         <td>
-                          <Button variant='dark' onClick={() => addToPokemonList(pokemon)}>+</Button>{' '}
+                          <Button variant='dark' onClick={() => addToPokemonList(pokemon)}>+</Button>
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </Table>
+                {!!previousUrl && <Button variant='primary' onClick={loadPreviousPokemon} className='tableControls'>{'< Previous'}</Button> }
+                {!!nextUrl && <Button variant='primary' onClick={loadNextPokemon} className='tableControls'>{'Next >'}</Button> }
               </Fragment>}
           </Col>
           <Col xs={12} md={4} lg={4}>
